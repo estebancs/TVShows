@@ -9,7 +9,7 @@ import UIKit
 import Resolver
 
 class TVShowsViewController: UIViewController {
-
+    static let cellWidth = UIScreen.main.bounds.size.width/3-10
     enum Section {
         case all
     }
@@ -19,9 +19,11 @@ class TVShowsViewController: UIViewController {
     lazy var tvShows = TVShows()
     lazy var dataSource = configureDataSource()
     
+    var pageNumber = 0
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 150)
+        layout.itemSize = CGSize(width: TVShowsViewController.cellWidth, height: TVShowsViewController.cellWidth*1.5)
         layout.estimatedItemSize = .zero
         layout.minimumInteritemSpacing = 5
         
@@ -37,7 +39,7 @@ class TVShowsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        updateSnapshot()
+        updateSnapshot(page: 0, animatingChange: false)
     }
     
 }
@@ -56,6 +58,7 @@ private extension TVShowsViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         collectionView.dataSource = dataSource
+        collectionView.prefetchDataSource = self
     }
     
     /// Configures the collectionview datasource
@@ -74,30 +77,42 @@ private extension TVShowsViewController {
     /// Updates the datasource snapshot
     /// - Parameters:
     ///   - animatingChange: to set diffable animation
-    func updateSnapshot(animatingChange: Bool = false) {
+    func updateSnapshot(page:Int, animatingChange: Bool = false) {
         // Create a snapshot and populate the data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, TVShow>()
-        snapshot.appendSections([.all])
-        fetchTvShows { [weak self] result in
+        fetchTvShows(page: page) { [weak self] result in
             switch result {
-            case .success(let tvShows):
+            case .success(let newTvShows):
+                guard let `self` = self else { return }
+                self.pageNumber += 1
                 var snapshot = NSDiffableDataSourceSnapshot<Section, TVShow>()
+                self.tvShows.append(contentsOf: newTvShows)
                 snapshot.appendSections([.all])
-                snapshot.appendItems(tvShows, toSection: .all)
-                self?.dataSource.apply(snapshot, animatingDifferences: false)
+                snapshot.appendItems(self.tvShows, toSection: .all)
+                self.dataSource.apply(snapshot, animatingDifferences: true)
             case .failure(let error):
                 print("error: \(error.errorMessage)")
             }
         }
     }
     
+    
     /// Fecths the list of tv shows
     /// - Parameters:
     ///   - completion: completion block after getting results
-    func fetchTvShows(completion: @escaping (Result<TVShows, HttpError>) -> Void) {
+    func fetchTvShows(page: Int, completion: @escaping (Result<TVShows, HttpError>) -> Void) {
         Task(priority: .background) {
-            let result = await service.show()
+            let result = await service.show(page: page)
             completion(result)
+        }
+    }
+    
+}
+
+extension TVShowsViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        guard let lastItem = indexPaths.last?.row else { return }
+        if lastItem == tvShows.count-1 {
+            updateSnapshot(page: pageNumber, animatingChange: true)
         }
     }
     
