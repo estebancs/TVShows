@@ -24,6 +24,16 @@
 		EDCD669D2868AC4E00434A12 /* RootTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCD669C2868AC4E00434A12 /* RootTabBarCoordinator.swift */; };
 		EDCD669F2868AD4B00434A12 /* Embedder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCD669E2868AD4B00434A12 /* Embedder.swift */; };
 		EDCD66A22868ADBA00434A12 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCD66A12868ADBA00434A12 /* UIView+Constraints.swift */; };
+		EDDEA4942868D70500749922 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4932868D70500749922 /* EndPoint.swift */; };
+		EDDEA4962868D73800749922 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4952868D73800749922 /* HttpMethod.swift */; };
+		EDDEA4982868D76800749922 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4972868D76800749922 /* HttpClient.swift */; };
+		EDDEA49A2868D79100749922 /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4992868D79100749922 /* HttpError.swift */; };
+		EDDEA49D2868DA6600749922 /* TVShowsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA49C2868DA6600749922 /* TVShowsEndPoint.swift */; };
+		EDDEA4A02868DBEB00749922 /* TVShowsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA49F2868DBEB00749922 /* TVShowsService.swift */; };
+		EDDEA4A32868DCAC00749922 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4A22868DCAC00749922 /* TVShow.swift */; };
+		EDDEA4A52868DD1B00749922 /* ImageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4A42868DD1B00749922 /* ImageObject.swift */; };
+		EDDEA4A72868E07700749922 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4A62868E07700749922 /* AppDelegate+Injection.swift */; };
+		EDDEA4A92868E91600749922 /* TVShows.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4A82868E91600749922 /* TVShows.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +80,16 @@
 		EDCD669C2868AC4E00434A12 /* RootTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarCoordinator.swift; sourceTree = "<group>"; };
 		EDCD669E2868AD4B00434A12 /* Embedder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Embedder.swift; sourceTree = "<group>"; };
 		EDCD66A12868ADBA00434A12 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		EDDEA4932868D70500749922 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		EDDEA4952868D73800749922 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
+		EDDEA4972868D76800749922 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		EDDEA4992868D79100749922 /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
+		EDDEA49C2868DA6600749922 /* TVShowsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsEndPoint.swift; sourceTree = "<group>"; };
+		EDDEA49F2868DBEB00749922 /* TVShowsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsService.swift; sourceTree = "<group>"; };
+		EDDEA4A22868DCAC00749922 /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
+		EDDEA4A42868DD1B00749922 /* ImageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageObject.swift; sourceTree = "<group>"; };
+		EDDEA4A62868E07700749922 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
+		EDDEA4A82868E91600749922 /* TVShows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShows.swift; sourceTree = "<group>"; };
 		FD6AA44C60FBC2690409EFA5 /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +169,7 @@
 		ED32182C2868A3C000A10617 /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
+				EDDEA4902868D6D900749922 /* Network */,
 				EDCD669B2868AC3500434A12 /* Scenes */,
 				EDCD66972868ABE900434A12 /* Common */,
 				EDCD66952868AB3100434A12 /* AppCoordinator.swift */,
@@ -159,6 +180,7 @@
 				ED3218332868A3C000A10617 /* Main.storyboard */,
 				ED32182F2868A3C000A10617 /* SceneDelegate.swift */,
 				ED3218312868A3C000A10617 /* ViewController.swift */,
+				EDDEA4A62868E07700749922 /* AppDelegate+Injection.swift */,
 			);
 			path = TVShows;
 			sourceTree = "<group>";
@@ -183,6 +205,7 @@
 		EDCD66972868ABE900434A12 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EDDEA4A12868DC3D00749922 /* Models */,
 				EDCD66A02868ADA500434A12 /* Extensions */,
 				EDCD66982868ABEE00434A12 /* Protocols */,
 			);
@@ -220,6 +243,53 @@
 				EDCD669C2868AC4E00434A12 /* RootTabBarCoordinator.swift */,
 			);
 			path = RootTabBar;
+			sourceTree = "<group>";
+		};
+		EDDEA4902868D6D900749922 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EDDEA49E2868DB9800749922 /* Services */,
+				EDDEA49B2868DA4900749922 /* Endpoints */,
+				EDDEA4922868D6F000749922 /* Base */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		EDDEA4922868D6F000749922 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EDDEA4932868D70500749922 /* EndPoint.swift */,
+				EDDEA4952868D73800749922 /* HttpMethod.swift */,
+				EDDEA4972868D76800749922 /* HttpClient.swift */,
+				EDDEA4992868D79100749922 /* HttpError.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		EDDEA49B2868DA4900749922 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				EDDEA49C2868DA6600749922 /* TVShowsEndPoint.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		EDDEA49E2868DB9800749922 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EDDEA49F2868DBEB00749922 /* TVShowsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EDDEA4A12868DC3D00749922 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EDDEA4A22868DCAC00749922 /* TVShow.swift */,
+				EDDEA4A42868DD1B00749922 /* ImageObject.swift */,
+				EDDEA4A82868E91600749922 /* TVShows.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,11 +533,21 @@
 			files = (
 				EDCD66962868AB3100434A12 /* AppCoordinator.swift in Sources */,
 				ED3218322868A3C000A10617 /* ViewController.swift in Sources */,
+				EDDEA49D2868DA6600749922 /* TVShowsEndPoint.swift in Sources */,
 				EDCD669F2868AD4B00434A12 /* Embedder.swift in Sources */,
+				EDDEA4A92868E91600749922 /* TVShows.swift in Sources */,
+				EDDEA4A02868DBEB00749922 /* TVShowsService.swift in Sources */,
+				EDDEA4942868D70500749922 /* EndPoint.swift in Sources */,
+				EDDEA4A52868DD1B00749922 /* ImageObject.swift in Sources */,
+				EDDEA49A2868D79100749922 /* HttpError.swift in Sources */,
+				EDDEA4A72868E07700749922 /* AppDelegate+Injection.swift in Sources */,
 				EDCD669A2868AC0600434A12 /* Coordinator.swift in Sources */,
+				EDDEA4A32868DCAC00749922 /* TVShow.swift in Sources */,
 				ED32182E2868A3C000A10617 /* AppDelegate.swift in Sources */,
+				EDDEA4982868D76800749922 /* HttpClient.swift in Sources */,
 				EDCD669D2868AC4E00434A12 /* RootTabBarCoordinator.swift in Sources */,
 				ED3218302868A3C000A10617 /* SceneDelegate.swift in Sources */,
+				EDDEA4962868D73800749922 /* HttpMethod.swift in Sources */,
 				EDCD66A22868ADBA00434A12 /* UIView+Constraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
