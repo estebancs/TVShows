@@ -3,22 +3,28 @@ PODS:
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
   - Resolver (1.5.0)
+  - SDWebImage (5.12.6):
+    - SDWebImage/Core (= 5.12.6)
+  - SDWebImage/Core (5.12.6)
 
 DEPENDENCIES:
   - R.swift (= 5.3.1)
   - Resolver (= 1.5.0)
+  - SDWebImage (= 5.12.6)
 
 SPEC REPOS:
   trunk:
     - R.swift
     - R.swift.Library
     - Resolver
+    - SDWebImage
 
 SPEC CHECKSUMS:
   R.swift: 56ec7e3aef34b9eee47a659e42462db2c1cc5ac3
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   Resolver: 68984624572763018fd8ec7b8e3e8df0e3b6bba5
+  SDWebImage: a47aea9e3d8816015db4e523daff50cfd294499d
 
-PODFILE CHECKSUM: 02bf017b0ff4928712c48c3992113457d70dda4c
+PODFILE CHECKSUM: e2edf789904183728660920c15312694ac5dde23
 
 COCOAPODS: 1.11.3

@@ -8,11 +8,11 @@
 import Foundation
 
 protocol TVShowsServicing {
-    func show() async -> Result<TVShows, HttpError>
+    func show(page:Int) async -> Result<TVShows, HttpError>
 }
 
 struct TVShowsService: HttpClient, TVShowsServicing {
-    func show() async -> Result<TVShows, HttpError> {
-        return await sendRequest(endpoint: TVShowsEndpoint.shows, responseModel: TVShows.self)
+    func show(page: Int) async -> Result<TVShows, HttpError> {
+        return await sendRequest(endpoint: TVShowsEndpoint.shows(page: page), responseModel: TVShows.self)
     }
 }

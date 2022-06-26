@@ -15,15 +15,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        Task(priority: .background) {
-            let result = await service.show()
-            switch result {
-            case .success(let movieResponse):
-                print("movieResponse: \(movieResponse)")
-            case .failure(let error):
-                print("error: \(error.errorMessage)")
-            }
-        }
     }
 
 

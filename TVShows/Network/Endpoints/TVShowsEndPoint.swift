@@ -6,7 +6,7 @@
 //
 
 enum TVShowsEndpoint {
-    case shows
+    case shows(page: Int)
 }
 
 extension TVShowsEndpoint: Endpoint {
@@ -35,8 +35,8 @@ extension TVShowsEndpoint: Endpoint {
     
     var path: String {
         switch self {
-        case .shows:
-            return "shows?page=0"
+        case .shows(let page):
+            return "shows?page=\(page)"
         }
     }
 }
