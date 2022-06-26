@@ -34,6 +34,8 @@
 		EDDEA4A52868DD1B00749922 /* ImageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4A42868DD1B00749922 /* ImageObject.swift */; };
 		EDDEA4A72868E07700749922 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4A62868E07700749922 /* AppDelegate+Injection.swift */; };
 		EDDEA4A92868E91600749922 /* TVShows.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4A82868E91600749922 /* TVShows.swift */; };
+		EDDEA4AC2868EEB200749922 /* TVShowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4AB2868EEB200749922 /* TVShowsViewController.swift */; };
+		EDDEA4AE2868F73000749922 /* TVShowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4AD2868F73000749922 /* TVShowCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,8 @@
 		EDDEA4A42868DD1B00749922 /* ImageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageObject.swift; sourceTree = "<group>"; };
 		EDDEA4A62868E07700749922 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
 		EDDEA4A82868E91600749922 /* TVShows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShows.swift; sourceTree = "<group>"; };
+		EDDEA4AB2868EEB200749922 /* TVShowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsViewController.swift; sourceTree = "<group>"; };
+		EDDEA4AD2868F73000749922 /* TVShowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD6AA44C60FBC2690409EFA5 /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,6 +228,7 @@
 		EDCD669B2868AC3500434A12 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				EDDEA4AA2868EE8F00749922 /* TVShows */,
 				EDCD66A32868AE3200434A12 /* RootTabBar */,
 			);
 			path = Scenes;
@@ -290,6 +295,15 @@
 				EDDEA4A82868E91600749922 /* TVShows.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EDDEA4AA2868EE8F00749922 /* TVShows */ = {
+			isa = PBXGroup;
+			children = (
+				EDDEA4AB2868EEB200749922 /* TVShowsViewController.swift */,
+				EDDEA4AD2868F73000749922 /* TVShowCollectionViewCell.swift */,
+			);
+			path = TVShows;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -542,6 +556,7 @@
 				EDDEA49A2868D79100749922 /* HttpError.swift in Sources */,
 				EDDEA4A72868E07700749922 /* AppDelegate+Injection.swift in Sources */,
 				EDCD669A2868AC0600434A12 /* Coordinator.swift in Sources */,
+				EDDEA4AE2868F73000749922 /* TVShowCollectionViewCell.swift in Sources */,
 				EDDEA4A32868DCAC00749922 /* TVShow.swift in Sources */,
 				ED32182E2868A3C000A10617 /* AppDelegate.swift in Sources */,
 				EDDEA4982868D76800749922 /* HttpClient.swift in Sources */,
@@ -549,6 +564,7 @@
 				ED3218302868A3C000A10617 /* SceneDelegate.swift in Sources */,
 				EDDEA4962868D73800749922 /* HttpMethod.swift in Sources */,
 				EDCD66A22868ADBA00434A12 /* UIView+Constraints.swift in Sources */,
+				EDDEA4AC2868EEB200749922 /* TVShowsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

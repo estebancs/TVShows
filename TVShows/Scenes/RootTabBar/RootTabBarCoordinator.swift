@@ -22,14 +22,15 @@ final class RootTabBarCoordinator: NSObject, Coordinator {
     func start() {
         let rootTabBarViewController = UITabBarController()
         
-        let tvShowsViewController = ViewController()
-        tvShowsViewController.tabBarItem.title = "TV Shows"
+        let tvShowsViewController = TVShowsViewController()
         
         let favoritesViewController = ViewController()
         favoritesViewController.tabBarItem.title = "Favorites"
+        favoritesViewController.tabBarItem.image = UIImage(systemName: "heart")
         
         let settingsViewController = ViewController()
         settingsViewController.tabBarItem.title = "Settings"
+        settingsViewController.tabBarItem.image = UIImage(systemName: "gear")
         
         rootTabBarViewController.viewControllers = [tvShowsViewController,favoritesViewController,settingsViewController]
         navigationController.setViewControllers([rootTabBarViewController], animated: false)

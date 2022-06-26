@@ -6,9 +6,9 @@ target 'TVShows' do
   use_frameworks!
 
   # Pods for TVShows
-  pod "Resolver", '1.5.0'
+  pod 'Resolver', '1.5.0'
   pod 'R.swift', '5.3.1'
-  
+  pod 'SDWebImage', '5.12.6'
   target 'TVShowsTests' do
     inherit! :search_paths
     # Pods for testing
