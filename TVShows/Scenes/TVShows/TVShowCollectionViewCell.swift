@@ -49,16 +49,16 @@ class TVShowCollectionViewCell: UICollectionViewCell {
         tvShowImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         tvShowImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         tvShowImageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        tvShowImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+        tvShowImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
 
-        nameLabel.topAnchor.constraint(equalTo: tvShowImageView.bottomAnchor, constant: 5).isActive = true
-        nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5.0).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 5.0).isActive = true
         nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -5.0).isActive = true
     }
     
     func configure(tvShow:TVShow) {
         nameLabel.text = tvShow.name
-        tvShowImageView.sd_setImage(with: tvShow.image.medium, placeholderImage: UIImage(named: "MoviePlaceHolder")!)
+        guard let placeHolder = UIImage(named: "MoviePlaceHolder") else { return }
+        tvShowImageView.sd_setImage(with: tvShow.image.medium, placeholderImage: placeHolder)
     }
 }

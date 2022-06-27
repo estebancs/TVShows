@@ -13,7 +13,6 @@ protocol ApplicationStarter: AnyObject {
 
 final class AppCoordinator {
 
-    // This will allow us to route to an onboarding flow in the future in the app coordinator
     var navigationController = UINavigationController()
 
     private(set) var childCoordinators = [Coordinator]()

@@ -23,6 +23,8 @@ final class RootTabBarCoordinator: NSObject, Coordinator {
         let rootTabBarViewController = UITabBarController()
         
         let tvShowsViewController = TVShowsViewController()
+        let tvShowsNavigationController = UINavigationController(rootViewController: tvShowsViewController)
+        tvShowsNavigationController.tabBarItem = tvShowsViewController.tabBarItem
         
         let favoritesViewController = ViewController()
         favoritesViewController.tabBarItem.title = "Favorites"
@@ -32,7 +34,7 @@ final class RootTabBarCoordinator: NSObject, Coordinator {
         settingsViewController.tabBarItem.title = "Settings"
         settingsViewController.tabBarItem.image = UIImage(systemName: "gear")
         
-        rootTabBarViewController.viewControllers = [tvShowsViewController,favoritesViewController,settingsViewController]
+        rootTabBarViewController.viewControllers = [tvShowsNavigationController,favoritesViewController,settingsViewController]
         navigationController.setViewControllers([rootTabBarViewController], animated: false)
     }
 }
