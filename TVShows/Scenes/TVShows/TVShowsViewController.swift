@@ -9,18 +9,42 @@ import UIKit
 import Resolver
 
 class TVShowsViewController: UIViewController {
+    /// cell width based on Screen width
     static let cellWidth = UIScreen.width/3-10
+    
+    /// Section of the collection view, using DiffableDataSource
     enum Section {
         case all
     }
     
+    /// Network service being inject by IoC
     @Injected var service: TVShowsServicing
     
+    /// List of tvShows to show
     lazy var tvShows = TVShows()
+    
+    /// List of tvShows to show if filtering with search bar
+    lazy var filteredTVShows = TVShows()
+    
+    /// Diffable datasource
     lazy var dataSource = configureDataSource()
     
+    /// Pagination number for requesting more episodes
     var pageNumber = 0
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    
+    var isSearchBarEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    /// flag to veirfy is we are filtering
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
+    
+    /// Collection configured to use flow layout
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: TVShowsViewController.cellWidth, height: TVShowsViewController.cellWidth*1.5)
@@ -60,6 +84,12 @@ private extension TVShowsViewController {
         collectionView.dataSource = dataSource
         collectionView.prefetchDataSource = self
         collectionView.delegate = self
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search TV Shows"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     /// Configures the collectionview datasource
@@ -67,7 +97,7 @@ private extension TVShowsViewController {
     ///   - The collectionview diffable data source
     func configureDataSource() -> UICollectionViewDiffableDataSource<Section, TVShow> {
         let dataSource = UICollectionViewDiffableDataSource<Section, TVShow>(collectionView: collectionView) { (collectionView, indexPath, tvShow) -> UICollectionViewCell? in
-     
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVShowCollectionViewCell.reuseIdentifier, for: indexPath) as? TVShowCollectionViewCell else {return UICollectionViewCell()}
             cell.configure(tvShow: tvShow)
             return cell
@@ -85,21 +115,33 @@ private extension TVShowsViewController {
             case .success(let newTvShows):
                 guard let `self` = self else { return }
                 self.pageNumber += 1
-                var snapshot = NSDiffableDataSourceSnapshot<Section, TVShow>()
                 self.tvShows.append(contentsOf: newTvShows)
-                snapshot.appendSections([.all])
-                snapshot.appendItems(self.tvShows, toSection: .all)
-                self.dataSource.apply(snapshot, animatingDifferences: true)
+                self.applySnapshot()
             case .failure(let error):
                 print("error: \(error.errorMessage)")
             }
         }
     }
     
+    /// Applies snapshot to collection view depending on isFiltering flag
+    /// - Parameters:
+    ///     - animatingDifferences: animate changes
+    func applySnapshot(animatingDifferences: Bool = true) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, TVShow>()
+        snapshot.appendSections([.all])
+        if isFiltering {
+            snapshot.appendItems(self.filteredTVShows, toSection: .all)
+        } else {
+            snapshot.appendItems(self.tvShows, toSection: .all)
+        }
+        self.dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
     
     /// Fecths the list of tv shows
     /// - Parameters:
-    ///   - completion: completion block after getting results
+    ///     - page: Pagination number
+    ///     - completion: completion block after getting results
     func fetchTvShows(page: Int, completion: @escaping (Result<TVShows, HttpError>) -> Void) {
         Task(priority: .background) {
             let result = await service.show(page: page)
@@ -122,12 +164,30 @@ extension TVShowsViewController: UICollectionViewDataSourcePrefetching {
 // MARK: - UICollectionViewDelegate
 extension TVShowsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let tvShowInfo = tvShows[indexPath.row]
+        var tvShowInfo = tvShows[indexPath.row]
+        if isFiltering {
+            tvShowInfo = filteredTVShows[indexPath.row]
+        }
+        
         let detailViewController = TVShowDetailViewController(tvShowDetail: tvShowInfo)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
-
-
-
+// MARK: - UISearchResultsUpdating
+extension TVShowsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
+    }
+    
+    /// Filter the tv Shows based on the text provided
+    /// - Parameters:
+    ///     - searchText: Text to search
+    func filterContentForSearchText(_ searchText: String) {
+        filteredTVShows = tvShows.filter { (tvShow: TVShow) -> Bool in
+            return tvShow.name.lowercased().contains(searchText.lowercased())
+        }
+        applySnapshot()
+    }
+}
