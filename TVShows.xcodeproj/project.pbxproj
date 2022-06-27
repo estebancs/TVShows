@@ -43,6 +43,7 @@
 		EDDEA4BA286952A000749922 /* String+htmlString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4B9286952A000749922 /* String+htmlString.swift */; };
 		EDDEA4BC28695CE900749922 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4BB28695CE900749922 /* Episode.swift */; };
 		EDDEA4BF2869692100749922 /* EpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4BE2869692100749922 /* EpisodeDetailViewController.swift */; };
+		EDDEA4C128697D2F00749922 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDDEA4C028697D2F00749922 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		EDDEA4B9286952A000749922 /* String+htmlString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+htmlString.swift"; sourceTree = "<group>"; };
 		EDDEA4BB28695CE900749922 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		EDDEA4BE2869692100749922 /* EpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewController.swift; sourceTree = "<group>"; };
+		EDDEA4C028697D2F00749922 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		FD6AA44C60FBC2690409EFA5 /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 				EDCD66952868AB3100434A12 /* AppCoordinator.swift */,
 				ED32182D2868A3C000A10617 /* AppDelegate.swift */,
 				ED3218362868A3C200A10617 /* Assets.xcassets */,
+				EDDEA4C028697D2F00749922 /* Localizable.strings */,
 				ED32183B2868A3C200A10617 /* Info.plist */,
 				ED3218382868A3C200A10617 /* LaunchScreen.storyboard */,
 				ED3218332868A3C000A10617 /* Main.storyboard */,
@@ -453,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED32183A2868A3C200A10617 /* LaunchScreen.storyboard in Resources */,
+				EDDEA4C128697D2F00749922 /* Localizable.strings in Resources */,
 				ED3218372868A3C200A10617 /* Assets.xcassets in Resources */,
 				ED3218352868A3C000A10617 /* Main.storyboard in Resources */,
 			);
