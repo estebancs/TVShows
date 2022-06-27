@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Resolver
 
 class ViewController: UIViewController {
+    
+    @Injected var service: TVShowsServicing
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
 

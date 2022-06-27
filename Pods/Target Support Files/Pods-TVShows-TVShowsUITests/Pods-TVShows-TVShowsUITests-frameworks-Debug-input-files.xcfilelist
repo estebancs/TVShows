@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-TVShows-TVShowsUITests/Pods-TVShows-TVShowsUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework
+${BUILT_PRODUCTS_DIR}/Resolver/Resolver.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
