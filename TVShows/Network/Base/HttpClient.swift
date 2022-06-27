@@ -16,7 +16,7 @@ extension HttpClient {
         endpoint: Endpoint,
         responseModel: T.Type
     ) async -> Result<T, HttpError> {
-        guard let url = URL(string: endpoint.baseURL + endpoint.path) else {
+        guard let path = endpoint.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: endpoint.baseURL + path) else {
             return .failure(.invalidURL)
         }
         
@@ -37,8 +37,9 @@ extension HttpClient {
             case 200...299:
                 print(response)
                 do {
+                    print(data)
                     let resultData = try JSONDecoder().decode(responseModel, from: data)
-                    print("Esteban - resultData: \(resultData)")
+                    
                 } catch (let error) {
                     print(error)
                 }
