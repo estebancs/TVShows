@@ -12,6 +12,8 @@ class TVShowDetailViewController: UIViewController {
     @Injected var service: TVShowsServicing
     
     private static let cellReuseIdentifier = "TVShowDetailViewControllerCellId"
+    private static let padding: CGFloat = 16.0
+    
     private var tvShowDetail: TVShow
     
     private var episodes = [Episode]()
@@ -79,7 +81,7 @@ class TVShowDetailViewController: UIViewController {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "Episodes"
+        label.text = String(localized: "Episodes")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -137,30 +139,30 @@ private extension TVShowDetailViewController {
         scrollView.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: 8.0),
-            scrollView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: 8.0),
-            scrollView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -8.0),
-            scrollView.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor, constant: -10.0),
+            scrollView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor, constant: TVShowDetailViewController.padding),
+            scrollView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: TVShowDetailViewController.padding),
+            scrollView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -TVShowDetailViewController.padding),
+            scrollView.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor, constant: -TVShowDetailViewController.padding),
             
-            headerImageView.topAnchor.constraint(equalTo: contentLayoutGuide.topAnchor, constant: 16.0),
-            headerImageView.leadingAnchor.constraint(equalTo: contentLayoutGuide.leadingAnchor, constant: 16.0),
+            headerImageView.topAnchor.constraint(equalTo: contentLayoutGuide.topAnchor, constant: TVShowDetailViewController.padding),
+            headerImageView.leadingAnchor.constraint(equalTo: contentLayoutGuide.leadingAnchor, constant: TVShowDetailViewController.padding),
             
-            stackViewInfo.topAnchor.constraint(equalTo: contentLayoutGuide.topAnchor, constant: 20.0),
-            stackViewInfo.leadingAnchor.constraint(equalTo: headerImageView.trailingAnchor, constant: 10.0),
-            stackViewInfo.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -10.0),
+            stackViewInfo.topAnchor.constraint(equalTo: contentLayoutGuide.topAnchor, constant: TVShowDetailViewController.padding),
+            stackViewInfo.leadingAnchor.constraint(equalTo: headerImageView.trailingAnchor, constant: TVShowDetailViewController.padding),
+            stackViewInfo.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -TVShowDetailViewController.padding),
             
-            summaryLabel.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 20.0),
-            summaryLabel.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: 10.0),
-            summaryLabel.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -10.0),
+            summaryLabel.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: TVShowDetailViewController.padding),
+            summaryLabel.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: TVShowDetailViewController.padding),
+            summaryLabel.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -TVShowDetailViewController.padding),
             
-            episodesLabel.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 10.0),
-            episodesLabel.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: 10.0),
-            episodesLabel.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -10.0),
+            episodesLabel.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: TVShowDetailViewController.padding),
+            episodesLabel.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: TVShowDetailViewController.padding),
+            episodesLabel.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -TVShowDetailViewController.padding),
             
             tableView.topAnchor.constraint(equalTo: episodesLabel.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: 10.0),
-            tableView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -10.0),
-            tableView.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor, constant: -16.0),
+            tableView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor, constant: TVShowDetailViewController.padding),
+            tableView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -TVShowDetailViewController.padding),
+            tableView.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor, constant: -TVShowDetailViewController.padding),
             
             
             //                    headerImageView.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor, constant: -16.0),
@@ -169,10 +171,10 @@ private extension TVShowDetailViewController {
         
         stackViewInfo.addArrangedSubview(nameLabel)
         stackViewInfo.addArrangedSubview(UIView())
-        stackViewInfo.addArrangedSubview(attributeLabel(text: "Scheduled:"))
+        stackViewInfo.addArrangedSubview(attributeLabel(text: String(localized: "Scheduled")))
         stackViewInfo.addArrangedSubview(scheduleLabel)
         stackViewInfo.addArrangedSubview(UIView())
-        stackViewInfo.addArrangedSubview(attributeLabel(text: "Genres:"))
+        stackViewInfo.addArrangedSubview(attributeLabel(text: String(localized: "Genres")))
         stackViewInfo.addArrangedSubview(genresLabel)
         
     }
@@ -197,6 +199,7 @@ private extension TVShowDetailViewController {
         }
     }
     
+    /// Wrapper of fetching episodes
     func getEpisodes() {
         fetchEpisodes(showId: tvShowDetail.id) { [weak self] result in
             switch result {
@@ -210,6 +213,9 @@ private extension TVShowDetailViewController {
         }
     }
     
+    /// Creates a new label with custom settings
+    /// - Parameters:
+    ///   - text
     func attributeLabel(text: String) -> UILabel {
         let label = UILabel()
         label.textColor = .black

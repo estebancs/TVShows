@@ -72,7 +72,7 @@ private extension TVShowsViewController {
     
     /// Configures the child view of the view controller
     func setupViews() {
-        tabBarItem.title = "TV Shows"
+        tabBarItem.title = String(localized: "TVShows")
         tabBarItem.image = UIImage(systemName: "film")
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
@@ -87,7 +87,7 @@ private extension TVShowsViewController {
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search TV Shows"
+        searchController.searchBar.placeholder = String(localized: "SearchTVShows")
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }

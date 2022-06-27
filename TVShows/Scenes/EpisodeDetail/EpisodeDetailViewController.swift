@@ -130,9 +130,9 @@ private extension EpisodeDetailViewController {
             summaryLabel.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor, constant: -EpisodeDetailViewController.padding),
         ])
         
-        stackViewInfo.addArrangedSubview(attributeLabel(text: "Season:"))
+        stackViewInfo.addArrangedSubview(attributeLabel(text: String(localized: "Season")))
         stackViewInfo.addArrangedSubview(seasonNumberLabel)
-        stackViewInfo.addArrangedSubview(attributeLabel(text: "Episode:"))
+        stackViewInfo.addArrangedSubview(attributeLabel(text: String(localized: "Episode")))
         stackViewInfo.addArrangedSubview(episodeNumberLabel)
     }
     
