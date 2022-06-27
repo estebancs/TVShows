@@ -224,7 +224,12 @@ private extension TVShowDetailViewController {
 
 
 extension TVShowDetailViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let episodeInfo = episodesBySeason[indexPath.section+1]?[indexPath.row] else { return }
+        let episodeDetailViewController = EpisodeDetailViewController(episodeDetail: episodeInfo)
+        navigationController?.pushViewController(episodeDetailViewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension TVShowDetailViewController: UITableViewDataSource {

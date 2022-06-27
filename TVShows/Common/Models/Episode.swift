@@ -10,4 +10,7 @@ struct Episode: Codable {
     let id: Int
     let name: String
     let season: Int
+    let number: Int
+    let image: ImageObject
+    let summary: String
 }

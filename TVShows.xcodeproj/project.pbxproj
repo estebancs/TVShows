@@ -42,6 +42,7 @@
 		EDDEA4B82869438400749922 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4B72869438400749922 /* Schedule.swift */; };
 		EDDEA4BA286952A000749922 /* String+htmlString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4B9286952A000749922 /* String+htmlString.swift */; };
 		EDDEA4BC28695CE900749922 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4BB28695CE900749922 /* Episode.swift */; };
+		EDDEA4BF2869692100749922 /* EpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4BE2869692100749922 /* EpisodeDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		EDDEA4B72869438400749922 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		EDDEA4B9286952A000749922 /* String+htmlString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+htmlString.swift"; sourceTree = "<group>"; };
 		EDDEA4BB28695CE900749922 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		EDDEA4BE2869692100749922 /* EpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewController.swift; sourceTree = "<group>"; };
 		FD6AA44C60FBC2690409EFA5 /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -240,6 +242,7 @@
 		EDCD669B2868AC3500434A12 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				EDDEA4BD286968A800749922 /* EpisodeDetail */,
 				EDDEA4B22869333800749922 /* TVShowDetail */,
 				EDDEA4AA2868EE8F00749922 /* TVShows */,
 				EDCD66A32868AE3200434A12 /* RootTabBar */,
@@ -330,6 +333,14 @@
 				EDDEA4B32869335D00749922 /* TVShowDetailViewController.swift */,
 			);
 			path = TVShowDetail;
+			sourceTree = "<group>";
+		};
+		EDDEA4BD286968A800749922 /* EpisodeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				EDDEA4BE2869692100749922 /* EpisodeDetailViewController.swift */,
+			);
+			path = EpisodeDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -584,6 +595,7 @@
 				EDDEA4942868D70500749922 /* EndPoint.swift in Sources */,
 				EDDEA4B6286935B900749922 /* UIScreen+Sizes.swift in Sources */,
 				EDDEA4A52868DD1B00749922 /* ImageObject.swift in Sources */,
+				EDDEA4BF2869692100749922 /* EpisodeDetailViewController.swift in Sources */,
 				EDDEA49A2868D79100749922 /* HttpError.swift in Sources */,
 				EDDEA4A72868E07700749922 /* AppDelegate+Injection.swift in Sources */,
 				EDCD669A2868AC0600434A12 /* Coordinator.swift in Sources */,
