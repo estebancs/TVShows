@@ -137,12 +137,14 @@ private extension EpisodeDetailViewController {
     }
     
     func showDetailInfo(episode: Episode) {
-        guard let placeHolder = UIImage(named: "MoviePlaceHolder") else { return }
-        headerImageView.sd_setImage(with: episode.image.original, placeholderImage: placeHolder)
         nameLabel.text = episode.name
         episodeNumberLabel.text = "\(episode.number)"
         seasonNumberLabel.text = "\(episode.season)"
-        summaryLabel.attributedText = episode.summary.htmlToAttributedString
+        if let summary = episode.summary?.htmlToAttributedString {
+            summaryLabel.attributedText = summary
+        }
+        guard let placeHolder = UIImage(named: "MoviePlaceHolder"), let image = episode.image?.original else { return }
+        headerImageView.sd_setImage(with: image, placeholderImage: placeHolder)
     }
     
     func attributeLabel(text: String) -> UILabel {

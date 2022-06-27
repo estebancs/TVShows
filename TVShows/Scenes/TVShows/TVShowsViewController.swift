@@ -123,6 +123,24 @@ private extension TVShowsViewController {
         }
     }
     
+    /// Updates the datasource snapshot
+    /// - Parameters:
+    ///   - animatingChange: to set diffable animation
+    func searchForShowAndApplySnapshot(text:String, animatingChange: Bool = false) {
+        // Create a snapshot and populate the data
+        searchTvShows(text: text) { [weak self] result in
+            switch result {
+            case .success(let searchResult):
+                guard let `self` = self else { return }
+                self.pageNumber += 1
+                self.filteredTVShows = searchResult.map{$0.show}
+                self.applySnapshot()
+            case .failure(let error):
+                print("error: \(error.errorMessage)")
+            }
+        }
+    }
+    
     /// Applies snapshot to collection view depending on isFiltering flag
     /// - Parameters:
     ///     - animatingDifferences: animate changes
@@ -145,6 +163,17 @@ private extension TVShowsViewController {
     func fetchTvShows(page: Int, completion: @escaping (Result<TVShows, HttpError>) -> Void) {
         Task(priority: .background) {
             let result = await service.show(page: page)
+            completion(result)
+        }
+    }
+    
+    /// Search for tv shows based in a string
+    /// - Parameters:
+    ///     - text: searching text
+    ///     - completion: completion block after getting results
+    func searchTvShows(text: String, completion: @escaping (Result<[SearchResult], HttpError>) -> Void) {
+        Task(priority: .background) {
+            let result = await service.searchShow(text: text)
             completion(result)
         }
     }
@@ -185,9 +214,10 @@ extension TVShowsViewController: UISearchResultsUpdating {
     /// - Parameters:
     ///     - searchText: Text to search
     func filterContentForSearchText(_ searchText: String) {
-        filteredTVShows = tvShows.filter { (tvShow: TVShow) -> Bool in
-            return tvShow.name.lowercased().contains(searchText.lowercased())
-        }
-        applySnapshot()
+//        filteredTVShows = tvShows.filter { (tvShow: TVShow) -> Bool in
+//            return tvShow.name.lowercased().contains(searchText.lowercased())
+//        }
+//        applySnapshot()
+        searchForShowAndApplySnapshot(text: searchText, animatingChange: true)
     }
 }

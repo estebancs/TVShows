@@ -10,10 +10,10 @@ import Foundation
 struct TVShow: Codable, Hashable {
     let id: Int
     let name: String
-    let image: ImageObject
+    let image: ImageObject?
     let genres: [String]
     let schedule: Schedule
-    let summary: String
+    let summary: String?
     
     var genresFormatted: String {
         return genres.map{"\($0)"}.joined(separator: ", ")

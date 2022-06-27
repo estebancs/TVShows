@@ -44,6 +44,7 @@
 		EDDEA4BC28695CE900749922 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4BB28695CE900749922 /* Episode.swift */; };
 		EDDEA4BF2869692100749922 /* EpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4BE2869692100749922 /* EpisodeDetailViewController.swift */; };
 		EDDEA4C128697D2F00749922 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDDEA4C028697D2F00749922 /* Localizable.strings */; };
+		EDDEA4C32869837400749922 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDEA4C22869837400749922 /* SearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		EDDEA4BB28695CE900749922 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		EDDEA4BE2869692100749922 /* EpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewController.swift; sourceTree = "<group>"; };
 		EDDEA4C028697D2F00749922 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		EDDEA4C22869837400749922 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		FD6AA44C60FBC2690409EFA5 /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -316,6 +318,7 @@
 				EDDEA4A82868E91600749922 /* TVShows.swift */,
 				EDDEA4B72869438400749922 /* Schedule.swift */,
 				EDDEA4BB28695CE900749922 /* Episode.swift */,
+				EDDEA4C22869837400749922 /* SearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				ED32182E2868A3C000A10617 /* AppDelegate.swift in Sources */,
 				EDDEA4982868D76800749922 /* HttpClient.swift in Sources */,
 				EDDEA4BA286952A000749922 /* String+htmlString.swift in Sources */,
+				EDDEA4C32869837400749922 /* SearchResult.swift in Sources */,
 				EDCD669D2868AC4E00434A12 /* RootTabBarCoordinator.swift in Sources */,
 				ED3218302868A3C000A10617 /* SceneDelegate.swift in Sources */,
 				EDDEA4962868D73800749922 /* HttpMethod.swift in Sources */,

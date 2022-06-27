@@ -13,10 +13,9 @@ class TVShowCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "TVShowCollectionViewCell"
 
     let tvShowImageView: UIImageView = {
-        let button = UIImageView()
-        button.backgroundColor = .red
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
 
@@ -58,7 +57,7 @@ class TVShowCollectionViewCell: UICollectionViewCell {
     
     func configure(tvShow:TVShow) {
         nameLabel.text = tvShow.name
-        guard let placeHolder = UIImage(named: "MoviePlaceHolder") else { return }
-        tvShowImageView.sd_setImage(with: tvShow.image.medium, placeholderImage: placeHolder)
+        guard let placeHolder = UIImage(named: "MoviePlaceHolder"), let image = tvShow.image?.medium  else { return }
+        tvShowImageView.sd_setImage(with: image, placeholderImage: placeHolder)
     }
 }

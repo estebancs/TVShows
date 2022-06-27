@@ -180,12 +180,14 @@ private extension TVShowDetailViewController {
     }
     
     func showDetailInfo(tvShow: TVShow) {
-        guard let placeHolder = UIImage(named: "MoviePlaceHolder") else { return }
-        headerImageView.sd_setImage(with: tvShow.image.medium, placeholderImage: placeHolder)
         nameLabel.text = tvShow.name
         scheduleLabel.text = tvShow.schedule.scheduleTime
         genresLabel.text = tvShow.genresFormatted
-        summaryLabel.attributedText = tvShow.summary.htmlToAttributedString
+        if let summary =  tvShow.summary?.htmlToAttributedString {
+            summaryLabel.attributedText = summary
+        }
+        guard let placeHolder = UIImage(named: "MoviePlaceHolder"), let image = tvShow.image?.medium  else { return }
+        headerImageView.sd_setImage(with: image, placeholderImage: placeHolder)
         tableView.reloadData()
     }
     
