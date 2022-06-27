@@ -9,7 +9,7 @@ import UIKit
 import Resolver
 
 class TVShowsViewController: UIViewController {
-    static let cellWidth = UIScreen.main.bounds.size.width/3-10
+    static let cellWidth = UIScreen.width/3-10
     enum Section {
         case all
     }
@@ -30,7 +30,7 @@ class TVShowsViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = .white
+        
         collectionView.contentInset = .init(top: 5, left:5, bottom: 5, right: 5)
         collectionView.register(TVShowCollectionViewCell.self, forCellWithReuseIdentifier: TVShowCollectionViewCell.reuseIdentifier)
         return collectionView
@@ -59,6 +59,7 @@ private extension TVShowsViewController {
         ])
         collectionView.dataSource = dataSource
         collectionView.prefetchDataSource = self
+        collectionView.delegate = self
     }
     
     /// Configures the collectionview datasource
@@ -67,7 +68,7 @@ private extension TVShowsViewController {
     func configureDataSource() -> UICollectionViewDiffableDataSource<Section, TVShow> {
         let dataSource = UICollectionViewDiffableDataSource<Section, TVShow>(collectionView: collectionView) { (collectionView, indexPath, tvShow) -> UICollectionViewCell? in
      
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVShowCollectionViewCell.reuseIdentifier, for: indexPath) as! TVShowCollectionViewCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVShowCollectionViewCell.reuseIdentifier, for: indexPath) as? TVShowCollectionViewCell else {return UICollectionViewCell()}
             cell.configure(tvShow: tvShow)
             return cell
         }
@@ -108,6 +109,7 @@ private extension TVShowsViewController {
     
 }
 
+// MARK: - UICollectionViewDataSourcePrefetching
 extension TVShowsViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         guard let lastItem = indexPaths.last?.row else { return }
@@ -115,5 +117,17 @@ extension TVShowsViewController: UICollectionViewDataSourcePrefetching {
             updateSnapshot(page: pageNumber, animatingChange: true)
         }
     }
-    
 }
+
+// MARK: - UICollectionViewDelegate
+extension TVShowsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tvShowInfo = tvShows[indexPath.row]
+        let detailViewController = TVShowDetailViewController(tvShowDetail: tvShowInfo)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+}
+
+
+
+

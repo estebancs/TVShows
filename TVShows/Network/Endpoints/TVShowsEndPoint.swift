@@ -7,19 +7,20 @@
 
 enum TVShowsEndpoint {
     case shows(page: Int)
+    case episodes(showId: Int)
 }
 
 extension TVShowsEndpoint: Endpoint {
     var method: HttpMethod {
         switch self {
-        case .shows:
+        case .shows, .episodes:
             return .get
         }
     }
     
     var header: [String : String]? {
         switch self {
-        case .shows:
+        case .shows, .episodes:
             return [
                 "Content-Type": "application/json;charset=utf-8"
             ]
@@ -28,7 +29,7 @@ extension TVShowsEndpoint: Endpoint {
     
     var body: [String : String]? {
         switch self {
-        case .shows:
+        case .shows, .episodes:
             return nil
         }
     }
@@ -37,6 +38,8 @@ extension TVShowsEndpoint: Endpoint {
         switch self {
         case .shows(let page):
             return "shows?page=\(page)"
+        case .episodes(let showId):
+            return "shows/\(showId)/episodes"
         }
     }
 }
