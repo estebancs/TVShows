@@ -13,5 +13,8 @@ extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
         register { TVShowsService() }
             .implements(TVShowsServicing.self)
+        
+        register { TVShowsViewModel() }
+            .implements(TVShowsViewModeling.self)
     }
 }

@@ -35,15 +35,6 @@ extension HttpClient {
             }
             switch response.statusCode {
             case 200...299:
-                print(response)
-                do {
-                    print(data)
-                    let resultData = try JSONDecoder().decode(responseModel, from: data)
-                    
-                } catch (let error) {
-                    print(error)
-                }
-                
                 guard let decodedResponse = try? JSONDecoder().decode(responseModel, from: data) else {
                     return .failure(.decode)
                 }

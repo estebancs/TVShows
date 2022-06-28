@@ -17,9 +17,6 @@ class TVShowsViewController: UIViewController {
         case all
     }
     
-    /// Network service being inject by IoC
-    @Injected var service: TVShowsServicing
-    
     /// List of tvShows to show
     lazy var tvShows = TVShows()
     
@@ -31,6 +28,8 @@ class TVShowsViewController: UIViewController {
     
     /// Pagination number for requesting more episodes
     var pageNumber = 0
+    
+    @Injected var viewModel: TVShowsViewModeling
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -63,7 +62,7 @@ class TVShowsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        updateSnapshot(page: 0, animatingChange: false)
+        viewModel.fetchTvShows()
     }
     
 }
@@ -90,6 +89,8 @@ private extension TVShowsViewController {
         searchController.searchBar.placeholder = String(localized: "SearchTVShows")
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        viewModel.output = self
     }
     
     /// Configures the collectionview datasource
@@ -104,42 +105,7 @@ private extension TVShowsViewController {
         }
         return dataSource
     }
-    
-    /// Updates the datasource snapshot
-    /// - Parameters:
-    ///   - animatingChange: to set diffable animation
-    func updateSnapshot(page:Int, animatingChange: Bool = false) {
-        // Create a snapshot and populate the data
-        fetchTvShows(page: page) { [weak self] result in
-            switch result {
-            case .success(let newTvShows):
-                guard let `self` = self else { return }
-                self.pageNumber += 1
-                self.tvShows.append(contentsOf: newTvShows)
-                self.applySnapshot()
-            case .failure(let error):
-                print("error: \(error.errorMessage)")
-            }
-        }
-    }
-    
-    /// Updates the datasource snapshot
-    /// - Parameters:
-    ///   - animatingChange: to set diffable animation
-    func searchForShowAndApplySnapshot(text:String, animatingChange: Bool = false) {
-        // Create a snapshot and populate the data
-        searchTvShows(text: text) { [weak self] result in
-            switch result {
-            case .success(let searchResult):
-                guard let `self` = self else { return }
-                self.pageNumber += 1
-                self.filteredTVShows = searchResult.map{$0.show}
-                self.applySnapshot()
-            case .failure(let error):
-                print("error: \(error.errorMessage)")
-            }
-        }
-    }
+
     
     /// Applies snapshot to collection view depending on isFiltering flag
     /// - Parameters:
@@ -154,30 +120,6 @@ private extension TVShowsViewController {
         }
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }
-    
-    
-    /// Fecths the list of tv shows
-    /// - Parameters:
-    ///     - page: Pagination number
-    ///     - completion: completion block after getting results
-    func fetchTvShows(page: Int, completion: @escaping (Result<TVShows, HttpError>) -> Void) {
-        Task(priority: .background) {
-            let result = await service.show(page: page)
-            completion(result)
-        }
-    }
-    
-    /// Search for tv shows based in a string
-    /// - Parameters:
-    ///     - text: searching text
-    ///     - completion: completion block after getting results
-    func searchTvShows(text: String, completion: @escaping (Result<[SearchResult], HttpError>) -> Void) {
-        Task(priority: .background) {
-            let result = await service.searchShow(text: text)
-            completion(result)
-        }
-    }
-    
 }
 
 // MARK: - UICollectionViewDataSourcePrefetching
@@ -185,7 +127,8 @@ extension TVShowsViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         guard let lastItem = indexPaths.last?.row else { return }
         if lastItem == tvShows.count-1 {
-            updateSnapshot(page: pageNumber, animatingChange: true)
+//            updateSnapshot(page: pageNumber, animatingChange: true)
+            viewModel.fetchTvShows()
         }
     }
 }
@@ -214,10 +157,19 @@ extension TVShowsViewController: UISearchResultsUpdating {
     /// - Parameters:
     ///     - searchText: Text to search
     func filterContentForSearchText(_ searchText: String) {
-//        filteredTVShows = tvShows.filter { (tvShow: TVShow) -> Bool in
-//            return tvShow.name.lowercased().contains(searchText.lowercased())
-//        }
-//        applySnapshot()
-        searchForShowAndApplySnapshot(text: searchText, animatingChange: true)
+        viewModel.searchTvShow(text: searchText)
+    }
+}
+
+// MARK: - TVShowsViewOutput
+extension TVShowsViewController: TVShowsViewOutput {
+    func fetchedTvShows(tvShows: TVShows) {
+        self.tvShows.append(contentsOf: tvShows)
+        self.applySnapshot()
+    }
+    
+    func foundSerchedTvShows(tvShows: TVShows) {
+        self.filteredTVShows = tvShows
+        self.applySnapshot()
     }
 }
